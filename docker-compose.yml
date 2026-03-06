@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: mauribus_postgres
+    environment:
+      POSTGRES_DB: mauribus_db
+      POSTGRES_USER: mauribus_user
+      POSTGRES_PASSWORD: secure_password_here
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mauribus_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis pour cache et WebSockets
+  redis:
+    image: redis:7-alpine
+    container_name: mauribus_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Django
+  backend:
+    build:
+      context: ./backend/mauribus_project
+      dockerfile: Dockerfile
+    container_name: mauribus_backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend/mauribus_project:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=change-me-in-production
+      - DB_NAME=mauribus_db
+      - DB_USER=mauribus_user
+      - DB_PASSWORD=secure_password_here
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Frontend React (optionnel, généralement lancé séparément)
+  frontend:
+    image: node:18-alpine
+    container_name: mauribus_frontend
+    working_dir: /app
+    volumes:
+      - ./admin-frontend:/app
+    ports:
+      - "5173:5173"
+    command: npm run dev
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: mauribus_network

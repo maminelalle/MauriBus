@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python.exe -c \":*)",
+      "Bash(powershell -NoProfile -Command \"Set-Content -Path ''admin-frontend/src/pages/BusesPage.jsx'' -Value ''test'' -Encoding UTF8; Write-Host ''PS works''\")"
+    ]
+  }
+}

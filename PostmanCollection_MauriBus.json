@@ -1,0 +1,658 @@
+{
+  "info": {
+    "name": "MauriBus API - Test Collection",
+    "description": "Collection de test pour vérifier tous les endpoints de l'API MauriBus",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. AUTHENTIFICATION",
+      "item": [
+        {
+          "name": "Login - Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matricule\": \"ADMN-001\",\n  \"password\": \"SecurePass123!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/login/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "login", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Chauffeur",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matricule\": \"DRV-0001\",\n  \"password\": \"DriverPass123!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/login/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "login", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. ADMINS",
+      "item": [
+        {
+          "name": "Lister tous les admins",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/admins/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "admins", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Détails admin (ADMN-001)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/admins/ADMN-001/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "admins", "ADMN-001", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Créer un nouvel admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Nouveau\",\n  \"prenom\": \"Admin\",\n  \"email\": \"nouveau.admin@mauribus.com\",\n  \"telephone\": \"+22250999999\",\n  \"nni\": \"999999999999999\",\n  \"role\": \"ADMIN\",\n  \"password\": \"TestAdminPass123!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/admins/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "admins", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. CHAUFFEURS",
+      "item": [
+        {
+          "name": "Lister tous les chauffeurs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/drivers/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "drivers", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Détails chauffeur (DRV-0001)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/drivers/DRV-0001/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "drivers", "DRV-0001", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Chauffeurs ACTIF",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/drivers/?statut=ACTIF",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "drivers", ""],
+              "query": [
+                {
+                  "key": "statut",
+                  "value": "ACTIF"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Chauffeurs en ligne",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/drivers/?is_online=true",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "drivers", ""],
+              "query": [
+                {
+                  "key": "is_online",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier chauffeur (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statut\": \"ACTIF\",\n  \"is_online\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/v1/drivers/DRV-0001/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "drivers", "DRV-0001", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer chauffeur",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/drivers/DRV-0005/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "drivers", "DRV-0005", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. BUS",
+      "item": [
+        {
+          "name": "Lister tous les bus",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/buses/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "buses", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Détails bus (BUS-001)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/buses/BUS-001/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "buses", "BUS-001", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bus ACTIF",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/buses/?statut=ACTIF",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "buses", ""],
+              "query": [
+                {
+                  "key": "statut",
+                  "value": "ACTIF"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. LIGNES",
+      "item": [
+        {
+          "name": "Lister toutes les lignes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/lines/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "lines", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Détails ligne (L1)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/lines/L1/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "lines", "L1", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "6. ARRÊTS",
+      "item": [
+        {
+          "name": "Lister tous les arrêts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/stops/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "stops", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Arrêts de la ligne L1",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/stops/?ligne=L1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "stops", ""],
+              "query": [
+                {
+                  "key": "ligne",
+                  "value": "L1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "7. TRAJETS",
+      "item": [
+        {
+          "name": "Lister tous les trajets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/trips/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "trips", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Trajets EN_COURS",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/trips/?statut=EN_COURS",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "trips", ""],
+              "query": [
+                {
+                  "key": "statut",
+                  "value": "EN_COURS"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "8. PAIEMENTS",
+      "item": [
+        {
+          "name": "Lister tous les paiements",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/payments/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "payments", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Paiements VALIDE",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/payments/?statut=VALIDE",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "payments", ""],
+              "query": [
+                {
+                  "key": "statut",
+                  "value": "VALIDE"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "9. SIGNALEMENTS",
+      "item": [
+        {
+          "name": "Lister tous les signalements",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/reports/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "reports", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Signalements prioritaires",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/reports/?priorite=HAUTE",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "reports", ""],
+              "query": [
+                {
+                  "key": "priorite",
+                  "value": "HAUTE"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "10. ALERTES SYSTÈME",
+      "item": [
+        {
+          "name": "Lister toutes les alertes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/system-alerts/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "system-alerts", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Alertes actives",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/system-alerts/?est_actif=true",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "system-alerts", ""],
+              "query": [
+                {
+                  "key": "est_actif",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "TOKEN",
+      "value": "votre_token_ici",
+      "type": "string"
+    }
+  ]
+}

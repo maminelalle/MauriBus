@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "MauriBus Chauffeur",
+    "slug": "mauribus-driver",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#1E40AF"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1E40AF"
+      },
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_BACKGROUND_LOCATION"]
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "MauriBus a besoin de votre position pour suivre le trajet.",
+          "locationWhenInUsePermission": "MauriBus a besoin de votre position pour suivre le trajet."
+        }
+      ]
+    ]
+  }
+}
