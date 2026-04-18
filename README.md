@@ -1,18 +1,18 @@
 # 🚌 MauriBus Tracking System
 
-Plateforme complète de gestion et géolocalisation des bus à Nouakchott.
+A complete platform for bus operations management and real-time geolocation in Nouakchott.
 
-## 📋 Architecture du Projet
+## 📋 Project Architecture
 
-```
+```text
 MauriBus_Try/
 ├── backend/                    # Django REST API
 │   ├── mauribus_project/
-│   │   ├── core/              # App principale
-│   │   │   ├── models/        # BD models
+│   │   ├── core/              # Main app
+│   │   │   ├── models/        # DB models
 │   │   │   ├── views/         # ViewSets
-│   │   │   ├── serializers/   # DRF Serializers
-│   │   │   └── middleware/    # Auth, Logs
+│   │   │   ├── serializers/   # DRF serializers
+│   │   │   └── middleware/    # Auth, logs
 │   │   ├── manage.py
 │   │   ├── requirements.txt
 │   │   └── settings.py
@@ -20,105 +20,121 @@ MauriBus_Try/
 │
 ├── admin-frontend/             # React Manager Dashboard
 │   ├── src/
-│   │   ├── components/        # Composants réutilisables
-│   │   ├── pages/            # Pages principales
-│   │   ├── context/          # Auth Context
-│   │   ├── hooks/            # Custom hooks
-│   │   ├── utils/            # API calls, helpers
-│   │   └── styles/           # Tailwind, custom CSS
+│   │   ├── components/        # Reusable components
+│   │   ├── pages/             # Main pages
+│   │   ├── context/           # Auth context
+│   │   ├─�� hooks/             # Custom hooks
+│   │   ├── utils/             # API calls, helpers
+│   │   └── styles/            # Tailwind + custom CSS
 │   ├── package.json
 │   └── .env.local
 │
-├── driver-mobile/              # React Native - Chauffeurs
-├── citizen-mobile/             # React Native - Citoyens
+├── driver-mobile/              # React Native - Drivers
+├── citizen-mobile/             # React Native - Citizens
 └── docs/                       # Documentation
 ```
 
-## 🔥 Démarrage Ultra-Rapide (Avec Données de Test)
+## 🖼️ Screenshots
 
-### ⚡ 3 Commandes qui vous mettent en ligne en 5 minutes:
+Project UI screenshots are available in the `screenhot/` folder.
 
-**Terminal 1 - Backend:**
+> Update the paths below to match your exact filenames.
+
+- ![Admin dashboard](screenhot/1.png)
+- ![Bus tracking map](screenhot/2.png)
+- ![Driver app](screenhot/3.png)
+- ![Citizen app](screenhot/4.png)
+
+## 🔥 Ultra Quick Start (With Test Data)
+
+### ⚡ 3 commands to get online in ~5 minutes
+
+**Terminal 1 — Backend:**
 ```bash
 cd backend/mauribus_project
 python manage.py migrate
 python manage.py runserver
 ```
 
-**Terminal 2 - Frontend:**
+**Terminal 2 — Frontend:**
 ```bash
 cd admin-frontend
 npm run dev
 ```
 
-**Navigateur:**
-```
+**Browser:**
+```text
 http://localhost:5173/login
 ```
 
-### 🔐 Identifiants Test:
-- **Matricule**: `ADMN-001`
-- **Mot de passe**: `SecurePass123!`
+### 🔐 Test credentials
+- **ID (Matricule):** `ADMN-001`
+- **Password:** `SecurePass123!`
 
-### 📊 Données Créées Automatiquement:
-- ✅ 5 Admins (ADMN-001 à ADMN-005)
-- ✅ 5 Chauffeurs (DRV-0001 à DRV-0005)
-- ✅ 5 Bus (BUS-001 à BUS-005)
-- ✅ 5 Lignes + 25 Arrêts
-- ✅ 5 Trajets, Paiements, Signalements
-- ✅ 15 Positions GPS en temps réel
+### 📊 Automatically created test data
+- ✅ 5 admins (ADMN-001 to ADMN-005)
+- ✅ 5 drivers (DRV-0001 to DRV-0005)
+- ✅ 5 buses (BUS-001 to BUS-005)
+- ✅ 5 lines + 25 stops
+- ✅ 5 trips, payments, reports
+- ✅ 15 real-time GPS positions
 
 ---
 
-## 📚 Documentation Complète
+## 📚 Full Documentation
 
-| Document | Contenu |
+| Document | Content |
 |----------|---------|
-| **ACCES_RAPIDE.md** | START HERE - URLs, credentials, troubleshooting |
-| **QUICK_START_TEST.md** | Guide détaillé de démarrage |
-| **TEST_PLAN.md** | Plan de test exhaustif (13 catégories) |
-| **PostmanCollection_MauriBus.json** | Collection Postman prête à importer |
+| **ACCES_RAPIDE.md** | Start here — URLs, credentials, troubleshooting |
+| **QUICK_START_TEST.md** | Detailed startup guide |
+| **TEST_PLAN.md** | Complete test plan (13 categories) |
+| **PostmanCollection_MauriBus.json** | Postman collection ready to import |
 
 ---
 
-## 🔥 Démarrage Setup Complet
+## 🧩 Full Setup
 
 ### Backend
 ```bash
 cd backend/mauribus_project
 python -m venv venv
+# Windows:
 venv\Scripts\activate
+# macOS/Linux:
+# source venv/bin/activate
+
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
 
-### Frontend Manager
+### Manager Frontend
 ```bash
 cd admin-frontend
 npm install
 npm run dev
 ```
 
-## 🎯 Fonctionnalités Complètes
+## 🎯 Features
 
-✅ Dashboard en temps réel
-✅ Gestion des chauffeurs (CRUD)
-✅ Gestion des bus et lignes
-✅ Suivi GPS en temps réel
-✅ Gestion des paiements
-✅ Statistiques et rapports
-✅ Système d'alertes
-✅ Authentification JWT
+- ✅ Real-time dashboard
+- ✅ Driver management (CRUD)
+- ✅ Bus & line management
+- ✅ Real-time GPS tracking
+- ✅ Payments management
+- ✅ Statistics & reports
+- ✅ Alerting system
+- ✅ JWT authentication
 
-## 🔐 Sécurité
+## 🔐 Security
 
-- Mots de passe hashés (bcrypt)
-- JWT pour l'authentification
-- HTTPS obligatoire
-- Logs d'activité complets
-- Protection contre le spoofing GPS
+- Hashed passwords (bcrypt)
+- JWT authentication
+- HTTPS required (production)
+- Activity logs
+- GPS spoofing protection
 - Role-based access control (RBAC)
 
 ---
-Created with ❤️ for Nouakchott
+
+Created for Nouakchott
